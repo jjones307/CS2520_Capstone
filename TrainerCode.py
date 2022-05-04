@@ -1,17 +1,18 @@
 import string
+from CsvReader import reader
 
 
 def main():
     usr_input = input("Enter the text you would like to analyze:\n")
     vowels = "aeiou"
-    vowel_frequency = {}
-    vowel_group_frequency = {}
-    consonant_frequency = {}
+    vowel_frequency = dict()
+    vowel_group_frequency = dict()
+    consonant_frequency = dict()
 
-    testing = usr_input.lower()
+    usr_input = usr_input.lower()
     usr_input = [char for char in usr_input if char in string.ascii_lowercase]
     usr_input = "".join(usr_input)
-    #print(usr_input)
+    print(usr_input)
     i = 0
 
     while i < len(usr_input):
