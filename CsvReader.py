@@ -1,5 +1,5 @@
 def reader():
-    file_obj = open("names.csv", 'r')
+    file_obj = open("GermanNames.csv", 'r')
     for line in file_obj:
         string_obj = line.strip().replace(' ', '')
         yield string_obj.split(',')
