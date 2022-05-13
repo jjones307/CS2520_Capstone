@@ -61,9 +61,9 @@ def main():
         elif user_input[i] in vowels:            
             if (i+1 < len(user_input) and user_input[i+1] not in vowels) or i == len(user_input) - 1:
                 try:
-                    vowel_frequency[user_input[i]] += 1
+                    vowel_frequency[usr_input[j]] += 1
                 except KeyError:
-                    vowel_frequency[user_input[i]] = 1
+                    vowel_frequency[usr_input[j]] = 1
                 finally:
                     i += 1
             elif i+1 < len(user_input) and user_input[i+1] in vowels:
