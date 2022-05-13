@@ -3,7 +3,7 @@ from CsvReader import reader
 
 
 def main():
-    usr_input = input("Enter the text you would like to analyze:\n")
+    user_input = input("Enter the text you would like to analyze:\n")
     vowels = "aeiou"
     vowel_frequency = dict()
     vowel_group_frequency = dict()
@@ -16,20 +16,20 @@ def main():
     for i in range(len(usr_input)):
         if usr_input[i] not in vowels:
             try:
-                consonant_frequency[usr_input[i]] += 1
+                consonant_frequency[user_input[i]] += 1
             except KeyError:
                 consonant_frequency[usr_input[i]] = 1
         else:
             if i+1 < len(usr_input) and usr_input[i+1] not in vowels:
                 try:
-                    vowel_frequency[usr_input[i]] += 1
+                    vowel_frequency[user_input[i]] += 1
                 except KeyError:
                     vowel_frequency[usr_input[i]] = 1
             elif i+1 < len(usr_input) and usr_input[i+1] in vowels:
                 vowel_group = usr_input[i]
                 j = i+1
-                while j < len(usr_input) and usr_input[j] in vowels:
-                    vowel_group += usr_input[j]
+                while j < len(user_input) and user_input[j] in vowels:
+                    vowel_group += user_input[j]
                     j += 1
                 try:
                     vowel_group_frequency[vowel_group] += 1
