@@ -3,38 +3,52 @@ from CsvReader import reader
 
 
 def main():
-    user_input = input("Enter the text you would like to analyze:\n")
+    usr_input = input("Enter the text you would like to analyze:\n").lower()
     vowels = "aeiou"
     vowel_frequency = dict()
     vowel_group_frequency = dict()
     consonant_frequency = dict()
 
-    usr_input = usr_input.lower()
     usr_input = [char for char in usr_input if char in string.ascii_lowercase]
     usr_input = "".join(usr_input)
 
-    for i in range(len(usr_input)):
-        if usr_input[i] not in vowels:
+    i = 0
+    while i < len(usr_input):
+        if usr_input[i] not in vowels:          # if not in vowels adds to frequency of consonant
             try:
-                consonant_frequency[user_input[i]] += 1
+                consonant_frequency[usr_input[i]] += 1
             except KeyError:
                 consonant_frequency[usr_input[i]] = 1
-        else:
-            if i+1 < len(usr_input) and usr_input[i+1] not in vowels:
-                try:
-                    vowel_frequency[user_input[i]] += 1
-                except KeyError:
-                    vowel_frequency[usr_input[i]] = 1
-            elif i+1 < len(usr_input) and usr_input[i+1] in vowels:
+            finally:
+                i += 1
+        else:                                   # else is in vowels, adds to frequency of vowels
+            try:
+                vowel_frequency[usr_input[i]] += 1
+            except KeyError:
+                vowel_frequency[usr_input[i]] = 1
+            finally:
                 vowel_group = usr_input[i]
                 j = i+1
-                while j < len(user_input) and user_input[j] in vowels:
-                    vowel_group += user_input[j]
-                    j += 1
+            """
+            goes through list and checks if following
+            chars are vowels, if they are vowels, groups them together and adds
+            to vowel_group_frequency
+            """
+            while j < len(usr_input) and usr_input[j] in vowels:
+
                 try:
-                    vowel_group_frequency[vowel_group] += 1
+                    vowel_frequency[usr_input[j]] += 1
                 except KeyError:
-                    vowel_group_frequency[vowel_group] = 1
+                    vowel_frequency[usr_input[j]] = 1
+                finally:
+                    vowel_group += usr_input[j]
+                    j += 1
+            try:
+                vowel_group_frequency[vowel_group] += 1
+            except KeyError:
+                vowel_group_frequency[vowel_group] = 1
+            finally:
+                i = j
 
     print(list(vowel_frequency.items()))
     print(list(vowel_group_frequency.items()))
