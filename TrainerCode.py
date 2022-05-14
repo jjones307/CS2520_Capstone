@@ -29,8 +29,8 @@ def main():
     rel_frequencies = dict()
 
     # This is our sample size, which is read from the file and incremented every time we run the trainer code
-    # Here it is initialized as 1 so it can be written to files when training on a language for the first time
-    n = 1
+    # Here it is initialized as 0; it gets incremented to 1 when saving the first sample data
+    n = 0
 
     try:
         inf = reader(lang_file)
@@ -186,6 +186,7 @@ def main():
 
     # Data is written into the file in the order vowel, consonant, vowel group, consonant group
     # Sections are separated by a # delimiter
+
     n += 1
     outf.write(str(n) + "\n")
     for vowel in list(vowel_frequency.items()):
