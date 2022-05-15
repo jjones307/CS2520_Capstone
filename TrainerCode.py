@@ -50,7 +50,7 @@ def main():
     user_input = user_input.lower()
     # Spaces are left in so that the last letter in a word and the first letter in the next word don't get
     # counted as a letter grouping
-    user_input = [char for char in user_input if char in string.ascii_lowercase or char == " "]
+    user_input = [char for char in user_input if char in string.ascii_lowercase or char in vowels or char in special_characters or char == " "]
     user_input = "".join(user_input)
     #print(user_input)
     i = 0
@@ -58,7 +58,7 @@ def main():
     # This first pass through is a simple count of the vowels and consonants in the text. These counts are used to determine
     # the relative frequency of vowels and consonants in the target language.
     for num in range(0, len(user_input)):
-        if user_input[num] in string.ascii_lowercase:
+        if user_input[num] != " ":
             if user_input[num] in vowels:
                 vowel_total += 1
             else:
@@ -69,7 +69,7 @@ def main():
     # This second pass through counts how often each vowel, consonant, vowel group, and consonant group appears in the test. 
     # This is done so that later on we can use weighted random choices construct letter groupings which mimic those of the target language.
     while i < len(user_input):
-        if user_input[i] not in string.ascii_lowercase and user_input[i] not in special_characters:
+        if user_input[i] == " ":
             i += 1
             pass
         elif user_input[i] not in vowels: 
@@ -127,7 +127,52 @@ def main():
                     except KeyError:
                         vowel_group_counts[vowel_group] = 1
                     finally:
-                        i = j    
+                        i = j  
+
+    # This series of loops finds the frequency with which different vowels and consonants appear next to each other.
+    # The goal is to use the frequency of adjacency to produce more readable outputs that more closely resemble the 
+    # target language.
+
+    '''
+    Notes to self:
+    iterate through list of vowels
+        for each single vowel in the text, note and count its adjacencies
+            store in dictionary of dictionaries
+    iterate through list of consonants
+        do same as above
+    iterate through list of vowel groups
+        search through text for each instance of the given vowel group
+            maybe something like "if text[i:len(vg)]"
+    iterate through consonant groups
+        do same as above
+    '''
+    ################################### Nothing between this bar and the one below actually does anything yet ###################################
+    '''
+    letter_counts = [list(vowel_counts.keys()), list(consonant_counts.keys()), list(vowel_group_counts.keys()), list(consonant_group_counts.keys())]
+    # adjacencies is a dictionary of dictionaries
+    adjacencies = dict()
+
+    for key_list in letter_counts:
+        for key in key_list:
+            adjacencies[key] = dict()
+
+    i = 0
+    for i in range(len(user_input)):
+        if user_input[i] == " ":
+            pass
+        elif i+1 < len(user_input):
+            if user_input[i] in letter_counts[0] and user_input[i+1] in letter_counts[1]:
+                try:
+                    adjacencies[user_input[i]][user_input[i+1]] += 1
+                except KeyError:
+                    adjacencies[user_input[i]][user_input[i+1]] = 1
+            elif user_input[i] in letter_counts[1] and user_input[i+1] in letter_counts[0]:
+                try:
+                    adjacencies[user_input[i]][user_input[i+1]] += 1
+                except KeyError:
+                    adjacencies[user_input[i]][user_input[i+1]] = 1
+    '''
+    ################################### Nothing between this bar and the one above actually does anything yet ###################################            
 
     rel_vowel_frequency = vowel_total/(len(user_input) - uncounted)
     rel_consonant_frequency = cons_total/(len(user_input) - uncounted)
