@@ -54,10 +54,6 @@ def generate(lang_choice):
             next_letter = 'v'
     
     return generated_name
-
-# Just here for testing purposes, we'll have to comment this out in the finished product
-print("Spanish:", generate("spanish"))
-print("French:", generate("french"))
     
 
 
