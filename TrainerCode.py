@@ -21,7 +21,7 @@ def main():
 
     try:
         inf = reader(lang_file)
-        counts=[vowel_frequency, consonant_frequency, vowel_group_frequency, consonant_group_frequency, rel_frequencies]
+        counts = [vowel_frequency, consonant_frequency, vowel_group_frequency, consonant_group_frequency, rel_frequencies]
         c_index = 0
 
         n = int(next(inf)[0])
