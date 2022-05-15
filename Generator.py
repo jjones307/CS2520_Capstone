@@ -1,7 +1,6 @@
 from CsvReader import reader
 import random
-
-
+from ftfy import fix_encoding
 
 def generate(lang_choice):
     lang_file = lang_choice.lower() + ".txt"
@@ -21,9 +20,10 @@ def generate(lang_choice):
         line = next(inf)
         if line[0] == "#":
             c_index += 1
-        else:            
+        else:
+            line[0] = fix_encoding(line[0])
             # Division by n occurs here in order to produce an average frequency
-            counts[c_index][line[0] ] = float(line[1])/n
+            counts[c_index][line[0]] = float(line[1])/n
 
     name_length = random.randint(5,8)
     generated_name = ""
@@ -32,7 +32,7 @@ def generate(lang_choice):
     v_or_c = ["v", "c"]
     choice = random.choices(v_or_c, weights=[rel_frequencies["v"], rel_frequencies["c"]])
     next_letter = choice[0]
-
+    
     while(len(generated_name) < name_length):
         if next_letter == 'v':
             choice = random.choices(['v', 'vg'], weights = [rel_frequencies['v'] - rel_frequencies['vg'], rel_frequencies['vg']])[0]
@@ -55,5 +55,3 @@ def generate(lang_choice):
     
     return generated_name
     
-
-

@@ -6,9 +6,7 @@ def main():
     lang_choice = input("Choose a language from the options provided above:\n")
     lang_file = lang_choice.lower() + ".txt"
     user_input = input("Enter the text you would like to analyze:\n")
-
-    # Accented characters don't seem to be recognized at the moment, but I'm leaving them in
-    # in case we can figure it out
+    
     vowels = "aàáâãäåeèéêëiìíîïoòóõöuùúûü"
     special_characters = "çñ"
     vowel_total = 0
