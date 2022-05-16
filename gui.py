@@ -47,7 +47,7 @@ def trainPress():
     train(currentLang, trainInput.get("1.0","end-1c"))
 
 
-    messagebox.showinfo(title='Language Trainer', message='Succesfully trained' )
+    messagebox.showinfo(title='Language Trainer', message='Successfully trained' )
     print(currentLang)
     print(trainInput.get("1.0","end-1c"))
 
