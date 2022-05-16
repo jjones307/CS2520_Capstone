@@ -34,7 +34,7 @@ langPrompt.place(relx=.5, rely=.0, anchor=N)
 
 combo = Combobox(window)
 combo.configure(state='readonly')
-combo['values']= ('English', 'Spanish', 'French', 'German')
+combo['values']= ('Italian', 'Spanish', 'French', 'German')
 combo.current(0) #set the selected item
 combo.grid(column=0, row=1)
 combo.place(relx=.5, rely=.05, anchor=N)
